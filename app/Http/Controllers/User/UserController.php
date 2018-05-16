@@ -69,22 +69,23 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $rules = [
-            'email' => 'email|unique:users,email,' . $user->id,
-            'password' => 'min:6|confirmed',
-            'admin' => 'in: ' . User::USUARIO_ADMINISTRADOR . ',' . User::USUARIO_REGULAR,
-        ];
+         $reglas = [
+             'email' => 'email|unique:users,email,' . $user->id,
+             'password' => 'min:6|confirmed',
+             'admin' => 'in:' . User::USUARIO_ADMINISTRADOR . ',' . User::USUARIO_REGULAR,
+         ];
 
-        $this->validate($request, $rules);
+      $this->validate($request, $reglas);
 
         if ($request->has('name')) {
             $user->name = $request->name;
         }
 
-        if ($request->has('email') && $user->mail != $request->email) {
+        if ($request->has('email') && $user->email != $request->email) {
             $user->verified = User::USUARIO_NO_VERIFICADO;
             $user->verification_token = User::generarVerificationToken();
             $user->email = $request->email;
+
         }
 
         if ($request->has('password')) {
@@ -107,9 +108,6 @@ class UserController extends Controller
 
         return response()->json(['data' => $user], 200);
 
-
-
-
     }
 
     /**
@@ -120,6 +118,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(['data' => $user], 200);
+        
     }
 }
