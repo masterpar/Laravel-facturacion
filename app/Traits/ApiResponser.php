@@ -2,7 +2,11 @@
 
 namespace App\Traits;
 
-trait ApiResponse
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+
+trait ApiResponser
 {
 	// respuesto / codigo
 	private function successResponse($data, $code){
@@ -24,7 +28,7 @@ trait ApiResponse
 	// mostar unico 
 	protected function showOne(Model $instance, $code=200){
 
-		return $this->successResponse(['data' => $collection], $code);
+		return $this->successResponse(['data' => $instance], $code);
 	}
 
 
