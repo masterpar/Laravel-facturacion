@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\Buyer;
 
 use App\Buyer;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use Illuminate\Database\Eloquent\Collection;
 
 class BuyerProductController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index(Buyer $buyer)
     {
-        $products = $buyer->transactions()->with('product')->get();
-        dd($products);
-        return $this->showAll($products);
+       $producto = $buyer->transactions()->with('products')->get()->pluck('products');
+      $pro = new Collection ($producto);
+       return $this->showAll($pro);
     }
 
    
