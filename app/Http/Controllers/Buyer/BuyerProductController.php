@@ -6,7 +6,7 @@ use App\Buyer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
-class BuyerTransactioController extends ApiController
+class BuyerProductController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,10 @@ class BuyerTransactioController extends ApiController
      */
     public function index(Buyer $buyer)
     {
-        $transactions = $buyer->transactions->get()->toJson();
-        //return $this->showAll($transactions);
+        $products = $buyer->transactions()->with('product')->get();
+        dd($products);
+        return $this->showAll($products);
     }
 
+   
 }

@@ -17,15 +17,9 @@ class TransactionCategoryController extends ApiController
      */
     public function index(Transaction $transaction)
     {
-      // $products = Transaction::whereHas('products')->pluck('id');
-
-        //dd($transaction->load('products.categories')->get());
-         $product = $transaction->product;
-
-         //$product = Product::find($transaction->product_id)->get();
-        // $category = Category::find($product->product_id);
-        // dd($transaction->pluck('product_id'));
-        return $this->showAll($product);
+     
+     $categorias = $transaction->products()->with('categories')->get();
+        return $this->showAll($categorias);
 
     }
 
