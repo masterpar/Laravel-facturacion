@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Seller;
+use App\Product;
 use App\Category;
 use App\Transaction;
 use Illuminate\Database\Eloquent\Model;
@@ -36,7 +37,7 @@ class Product extends Model
 		return $this->belongsTo(Seller::class);
 	}
 
-	public function transactios()
+	public function transactions()
 	{
 		return $this->hasMany(Transaction::class);
 	}

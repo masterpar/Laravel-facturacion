@@ -1,7 +1,7 @@
 <?php 
 
 
-namespace App\scope;
+namespace App\Scope;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;

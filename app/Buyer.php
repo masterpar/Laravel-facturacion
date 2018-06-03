@@ -3,7 +3,8 @@
 namespace App;
 
 use App\Transaction;
-use App\scope\BuyerScope;
+use App\Scope\BuyerScope;
+use Illuminate\Database\Eloquent\Model;
 
 class Buyer extends User
 {
