@@ -13,7 +13,7 @@ class BuyerCategoryController extends ApiController
     public function index(Buyer $buyer)
     {
         $categories = $buyer->transactions()
-        ->with('products.categories') // llama la relación transaction->product->seller
+        ->with('products.categories') // elecciona el atributo en la collection en la relación transaction->product->seller
         ->get()
         ->pluck('products.categories')
         ->collapse()  // junta todos los arrays en uno solo
