@@ -7,6 +7,7 @@ use App\Seller;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -74,6 +75,11 @@ class SellerProductController extends ApiController
             }
         }
 
+        if ($request->hasFile('image')) {
+            Storage::delete($product->image);
+            $product->image = $request->image->store('');
+        }
+
         if ($product->isClean()) {
             return $this->errorResponse('Se debe especificar al menor un valor para actualizar', 402);
         }
@@ -87,6 +93,7 @@ class SellerProductController extends ApiController
     public function destroy(Seller $seller, Product $product)
     {
         $this->verificarVendedor($seller,$product);
+        Storage::delete($product->image);
         $product->delete();
         return $this->showOne($product);
     }
