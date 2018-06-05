@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Seller;
 
+use App\User;
 use App\Seller;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
+use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends ApiController
@@ -19,9 +21,27 @@ class SellerProductController extends ApiController
 
    
    
-    public function store(Request $request)
+    public function store(Request $request, User $seller)
     {
-        //
+        $rules =[
+        'name' => 'required',
+        'description' => 'required',
+        'quantity' => 'required|integer|min:1',
+        'image' => 'required|image',
+        ];
+
+        $this->validate($request,$rules);
+
+        $data = $request->all();
+
+        $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
+        $data['image'] = $request->image->store('');
+        $data['seller_id'] = $seller->id;
+
+        $product = Product::create($data);
+
+       // $pp = new Collection($product);
+        return $this->showOne($product, 201);
     }
 
   
