@@ -40,7 +40,7 @@ class UserController extends ApiController
         $campos= $request->all();
         $campos['password'] = bcrypt($request->password);
         $campos['verified']= User::USUARIO_NO_VERIFICADO;
-        $campos['vertification_token'] = User::generarVerificationToken();
+        $campos['verification_token'] = User::generarVerificationToken();
         $campos['admin'] = User::USUARIO_REGULAR;
 
         $usuario = User::create($campos);
