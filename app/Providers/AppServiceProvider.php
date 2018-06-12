@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Mail\UserCreated;
+use App\Mail\UserMailChanged;
 use App\Product;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -38,11 +39,7 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
+    
     public function register()
     {
         //

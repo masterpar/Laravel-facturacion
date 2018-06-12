@@ -8,11 +8,7 @@ use App\Http\Controllers\ApiController;
 
 class UserController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         $usuarios = User::all();
@@ -20,12 +16,8 @@ class UserController extends ApiController
     }
 
   
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //  ---------------------------------- Crear usuario --------------------------------------
+
     public function store(Request $request)
     {
 
@@ -47,24 +39,15 @@ class UserController extends ApiController
         return $this->showOne($usuario, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //  ---------------------------------- Mostrar usuario --------------------------------------
+
     public function show(User $user)
     {
         return $this->showOne($user);
     }
 
-        /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //  ---------------------------------- Actualizar usuario --------------------------------------
+
     public function update(Request $request, User $user)
     {
          $reglas = [
@@ -80,26 +63,26 @@ class UserController extends ApiController
         }
 
         if ($request->has('email') && $user->email != $request->email) {
-            $user->verified = User::USUARIO_NO_VERIFICADO;
-            $user->verification_token = User::generarVerificationToken();
-            $user->email = $request->email;
 
+                $user->verified = User::USUARIO_NO_VERIFICADO;
+                $user->verification_token = User::generarVerificationToken();
+                $user->email = $request->email;
         }
 
         if ($request->has('password')) {
-            $user->password = bcrypt($request->password);
+             $user->password = bcrypt($request->password);
         }
 
         if ($request->has('admin')) {
             if (!$user->esVerificado()) {
-                return errorResponse('Unicamente usuarios verificados pueden cambiar su valor de administrador', 409);
+                return $this->errorResponse('Unicamente usuarios verificados pueden cambiar su valor de administrador', 409);
             }
 
             $user->admin = $request->admin;
         }
 
          if (!$user->isDirty()) {
-                return errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
+                return $this->errorResponse('Se debe especificar al menos un valor diferente para actualizar', 422);
             }
 
         $user->save();
@@ -108,12 +91,7 @@ class UserController extends ApiController
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //  ---------------------------------- Eliminar usuario --------------------------------------
     public function destroy(User $user)
     {
         $user->delete();
