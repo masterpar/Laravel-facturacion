@@ -2,18 +2,19 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use App\Traits\ApiResponser;
-use Illuminate\Database\QueryException;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Validation\ValidationException;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Exceptions\unauthenticated;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Foundation\Exceptions\unauthenticated;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -113,6 +114,10 @@ class Handler extends ExceptionHandler
         if (config('app.debug')){
            return parent::render($request, $exception);
                 }
+
+         if ($exceptions instanceof TokenMismatchException) {
+                    return redirect()->back()->withInput($request->input());
+                }       
 
                 
           // Verifica otro error no contemplado en la Api
