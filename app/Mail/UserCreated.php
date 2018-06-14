@@ -18,11 +18,7 @@ class UserCreated extends Mailable
         $this->user = $user;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+    
     public function build()
     {
         return $this->markdown('emails.welcome')->subject('Por favor confirmar tu correo electrónico');

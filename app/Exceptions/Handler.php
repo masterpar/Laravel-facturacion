@@ -132,14 +132,30 @@ class Handler extends ExceptionHandler
         // verifica si el usuario esta autenticado
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        if ($this->isFontend($request)) {
+            return redirect()->guest('login');
+        }
+
         return $this->errorResponse('No autenticado',201);
     }
 
    
         // envia errores en formato Json
     protected function convertValidationExceptionToResponse(ValidationException $e, $request)
-    {
-        
+    {        
+
+        if ($this->isFontend($request)) {
+            return $request->ajax() ? response()->json($e->errors(),422) : redirect()
+            ->back()
+            ->withInput($request->input())
+            ->withErrors($e->errors());
+        }
+
         return $this->errorResponse($e->errors(),422);
     }
+
+    private function isFontend($request)
+    {
+        return $request->acceptsHtml() &&  collect($request->route()->middleware())->contains('web');   
+     }
 }

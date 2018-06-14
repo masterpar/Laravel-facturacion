@@ -1,6 +1,6 @@
 
 @component('mail::mesagge')
-# Hola {{$user->name}}
+#Hola {{$user->name}}
 
 Gracias por crear una cuenta. Por favor verifica usando el siguiente botón:
 
@@ -11,3 +11,5 @@ Confirmar mi cuenta
 Gracias,<br>
 {{config('app.name')}}
 @endcomponent
+
+

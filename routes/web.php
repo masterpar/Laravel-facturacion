@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+ Route::get('/', function () {
+     return view('welcome');
+ });
 
 
 // Authentication Routes...
@@ -34,6 +34,9 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', function(){
-return view('welcome');
-})->middleware('guest') ;
+// Route::get('auth.usuarios', function(){
+// return view('welcome');
+// })->middleware('guest') ;
+
+Route::get('/usuarios','User\UserController@index');
+

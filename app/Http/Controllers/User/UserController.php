@@ -13,8 +13,9 @@ class UserController extends ApiController
    
     public function index()
     {
-        $usuarios = User::all();
-       return $this->showAll($usuarios);
+        $usuarios = User::paginate(15);
+        return view('auth.usuarios')->with('users', $usuarios);
+       //return $this->showAll($usuarios);
     }
 
   
