@@ -40,3 +40,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/usuarios','User\UserController@index');
 
+Route::get('/errors', function () use($code) {
+     return view('errors.errors', $code);
+ });
+

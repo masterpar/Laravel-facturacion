@@ -3,20 +3,25 @@
 namespace App\Traits;
 
 
-use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\Routing\Matcher\redirect;
+
+
 
 trait ApiResponser
 {
 	// respuesto / codigo
 	private function successResponse($data, $code){
 
+		
 		return response()->json($data, $code);
 	}
 	// error en la petición
 	protected function errorResponse($message, $code){
-		
-		return response()->json(['error' => $message, 'code' => $code], $code);
+		return redirect()->to('/errors')->with('code', $code);	
+		//return response()->json(['error' => $message, 'code' => $code], $code);
 	}
 
 	// mostar lista 

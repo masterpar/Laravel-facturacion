@@ -23,6 +23,9 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -84,9 +87,33 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
+                        @guest
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src={{ Auth::user()->image }} alt="user" class="profile-pic m-r-10" />{{ Auth::user()->name }}</a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{ route('login') }}"> {{ __('Iniciar Sesión') }}
+                            </a>
                         </li>
+                           @else
+                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><img src={{ Auth::user()->image }} alt="user" class="profile-pic m-r-10" /> {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+
+
+                        </li>
+                            @endguest
+
                     </ul>
                 </div>
             </nav>
