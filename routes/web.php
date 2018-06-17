@@ -39,6 +39,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // })->middleware('guest') ;
 
 Route::get('/usuarios','User\UserController@index');
-
+//Route::view('/usuario','auth.user');
+Route::get('/usuarios/{user}','User\UserController@show')->name('usuario');
 
 

@@ -39,14 +39,17 @@ class UserController extends ApiController
         $campos['admin'] = User::USUARIO_REGULAR;
 
         $usuario = User::create($campos);
-        return $this->showOne($usuario, 201);
+        return $this->showOne($usuario, 201); 
+
+
     }
 
     //  ---------------------------------- Mostrar usuario --------------------------------------
 
     public function show(User $user)
     {
-        return $this->showOne($user);
+        return view('auth.user', ['user' => $user]);
+      //  return $this->showOne($user); API
     }
 
     //  ---------------------------------- Actualizar usuario --------------------------------------
@@ -90,8 +93,8 @@ class UserController extends ApiController
 
         $user->save();
 
-        return $this->showOne($user);
-
+        return $this->showOne($user); 
+        
     }
 
     //  ---------------------------------- Eliminar usuario --------------------------------------
