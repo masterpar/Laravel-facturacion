@@ -20,8 +20,9 @@ trait ApiResponser
 	}
 	// error en la petición
 	protected function errorResponse($message, $code){
-		return redirect()->to('/errors')->with('code', $code);	
-		//return response()->json(['error' => $message, 'code' => $code], $code);
+		
+	return response()->make(view('Error.error', ['code' => $code, 'mensaje' => $message]));; //Web
+		//return response()->json(['error' => $message, 'code' => $code], $code); API
 	}
 
 	// mostar lista 

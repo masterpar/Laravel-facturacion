@@ -18,6 +18,7 @@
                                                 <th>Correo</th>
                                                 <th>Verificado</th>
                                                 <th>Admin</th>
+                                                <th>Procesos</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -38,6 +39,12 @@
                                                 @else
                                                 <td>no</td>
                                                 @endif
+                                                <td>
+                                                <a href="index.html" class="btn btn-info btn-rounded waves-effect waves-light m-b-10">Editar</a>
+                                                </td>
+                                                <td>
+                                                <a href="index.html" class="btn btn-danger btn-rounded waves-effect waves-light m-b-10">Eliminar</a>
+                                                </td>
                                             </tr>
                                            @endforeach
                                         </tbody>

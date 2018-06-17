@@ -88,31 +88,18 @@
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         @guest
+
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a></li>
+
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="{{ route('register') }}">{{ __('Registrarse') }}</a></li>
+                        @else
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="{{ route('login') }}"> {{ __('Iniciar Sesión') }}
                             </a>
                         </li>
-                           @else
-                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"><img src={{ Auth::user()->image }} alt="user" class="profile-pic m-r-10" /> {{ Auth::user()->name }}
-                            </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-
-
-                        </li>
-                            @endguest
+                        @endguest
 
                     </ul>
                 </div>
