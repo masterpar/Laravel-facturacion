@@ -38,8 +38,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 // return view('welcome');
 // })->middleware('guest') ;
 
-Route::get('/usuarios','User\UserController@index');
+Route::get('/users/{id}','UserController@show')->name('user');
+
+Route::get('/buyers/{id}','BuyerController@show' )->name('buyer');
+Route::get('/buyers/{id}/products','BuyerProductController@index')->name('buyer.product');
+Route::get('/products/{id}','ProductController@show')->name('Producto.product');
+
+// Route::get('/buyers/{id}', function($id)
+//     {
+//         $user = \App\Buyer::findOrFail($id);
+//         return view('auth.buyer', compact('buyer'));
+//     })->name('buyer');
+
+//Route::get('/usuarios','User\UserController@index');
 //Route::view('/usuario','auth.user');
-Route::get('/usuarios/{user}','User\UserController@show')->name('usuario');
+//Route::resource('users','User\UserController')->name('usuario');
+
+//Route::resource('users','User\UserController', ['except' => ['create', 'edit']]);
 
 

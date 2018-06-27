@@ -7,7 +7,7 @@
 <div class="col-lg-12">
    <div class="card">
      <div class="card-block">
-      <h4 class="card-title">Lista de Usuarios</h4>
+      <h4 class="card-title">Compradores</h4>
         <h6 class="card-subtitle">Registrados </h6>
          <div class="table-responsive">
           <table class="table">
@@ -23,24 +23,24 @@
                 </thead>                       
                 <tbody>
                 <tr>
-                @foreach($users as $user)
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
+                @foreach($buyers as $buyer)
+                <td>{{ $buyer->id }}</td>
+                <td>{{ $buyer->name }}</td>
+                <td>{{ $buyer->email }}</td>
 
-                @if($user->verified == 1)
+                @if($buyer->verified == 1)
                 <td>si</td>
                 @else
                 <td>no</td>
                 @endif
                 
-                @if($user->admin  == 'true')
+                @if($buyer->admin  == 'true')
                 <td>si</td>
                 @else
                 <td>no</td>
                 @endif
                 <td>
-                 <a href= "{{ route('user',$user) }} "
+                 <a href= "{{ route('buyer',$buyer) }} "
                 class="btn btn-primary btn-rounded waves-effect waves-light m-b-10" > Ver </a>
                 </td>
                 <td>
@@ -57,7 +57,7 @@
 </div>
 </div>
 </div>
-{{ $users->links() }}
+{{ $buyers->links() }}
 </div>
 
 @endsection

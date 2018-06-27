@@ -48,8 +48,10 @@ class UserController extends ApiController
 
     public function show(User $user)
     {
-        return view('auth.user', ['user' => $user]);
-      //  return $this->showOne($user); API
+        
+        //return response()->make(view('auth.user', ['user' => $user]));
+        return view('auth.user', compact('user'));
+      //return $this->showOne($user); 
     }
 
     //  ---------------------------------- Actualizar usuario --------------------------------------

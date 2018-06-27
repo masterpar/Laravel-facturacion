@@ -8,11 +8,7 @@ use App\Http\Controllers\ApiController;
 
 class ProductController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function index()
     {
         $product = Product::all();
@@ -20,17 +16,11 @@ class ProductController extends ApiController
 
     }
 
-    
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
-       return $this->showOne($product);
+        return view('Producto.product')->with('product',$product);
+       //return $this->showOne($product);
     }
 
    

@@ -14,14 +14,13 @@ trait ApiResponser
 {
 	// respuesto / codigo
 	private function successResponse($data, $code){
-
 		
 		return response()->json($data, $code);
 	}
 	// error en la petición
 	protected function errorResponse($message, $code){
 		
-	return response()->make(view('Error.error', ['code' => $code, 'mensaje' => $message]));; //Web
+	return response()->make(view('Error.error', ['code' => $code, 'mensaje' => $message])); //Web
 		//return response()->json(['error' => $message, 'code' => $code], $code); API
 	}
 
